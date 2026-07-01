@@ -1,35 +1,55 @@
 import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
+import StatCard from "../components/StatCard";
 
 function Dashboard() {
   return (
     <div className="flex min-h-screen bg-slate-950 text-white">
+      {/* Sidebar */}
       <Sidebar />
 
+      {/* Main Content */}
       <main className="flex-1 p-10">
-        <h1 className="text-4xl font-bold">
-          Welcome back 👋
-        </h1>
+        {/* Top Navigation */}
+        <Topbar />
 
-        <p className="mt-3 text-slate-400">
-          Upload documents, chat with AI, and organize your knowledge.
-        </p>
-
+        {/* Statistics Cards */}
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl bg-slate-900 p-6">
-            <h2 className="text-xl font-semibold">📄 Documents</h2>
-            <p className="mt-2 text-slate-400">0 uploaded</p>
-          </div>
+          <StatCard
+            title="Documents"
+            value="0"
+            icon="📄"
+          />
 
-          <div className="rounded-2xl bg-slate-900 p-6">
-            <h2 className="text-xl font-semibold">🤖 AI Chats</h2>
-            <p className="mt-2 text-slate-400">No conversations yet</p>
-          </div>
+          <StatCard
+            title="AI Chats"
+            value="0"
+            icon="🤖"
+          />
 
-          <div className="rounded-2xl bg-slate-900 p-6">
-            <h2 className="text-xl font-semibold">⭐ Favorites</h2>
-            <p className="mt-2 text-slate-400">Nothing saved</p>
-          </div>
+          <StatCard
+            title="Favorites"
+            value="0"
+            icon="⭐"
+          />
         </div>
+
+        {/* Recent Documents */}
+        <section className="mt-12">
+          <h2 className="mb-6 text-2xl font-bold">
+            📂 Recent Documents
+          </h2>
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+            <p className="text-slate-400">
+              No documents uploaded yet.
+            </p>
+
+            <button className="mt-5 rounded-xl bg-cyan-500 px-5 py-3 font-semibold text-black transition hover:bg-cyan-400">
+              Upload Your First Document
+            </button>
+          </div>
+        </section>
       </main>
     </div>
   );
