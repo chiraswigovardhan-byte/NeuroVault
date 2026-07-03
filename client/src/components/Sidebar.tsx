@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
-  const [active, setActive] = useState("Dashboard");
-
   const menu = [
-    "Dashboard",
-    "Documents",
-    "AI Chat",
-    "Favorites",
-    "Settings",
+    { name: "Dashboard", path: "/dashboard", icon: "📊" },
+    { name: "Documents", path: "/documents", icon: "📄" },
+    { name: "AI Chat", path: "/chat", icon: "🤖" },
+    { name: "Favorites", path: "/favorites", icon: "⭐" },
+    { name: "Settings", path: "/settings", icon: "⚙️" },
   ];
 
   return (
@@ -19,17 +17,19 @@ function Sidebar() {
 
       <nav className="space-y-2">
         {menu.map((item) => (
-          <button
-            key={item}
-            onClick={() => setActive(item)}
-            className={`w-full rounded-xl px-4 py-3 text-left transition ${
-              active === item
-                ? "bg-cyan-500 text-black"
-                : "hover:bg-slate-800 hover:text-cyan-400"
-            }`}
+          <NavLink
+            key={item.name}
+            to={item.path}
+            className={({ isActive }) =>
+              `block w-full rounded-xl px-4 py-3 transition ${
+                isActive
+                  ? "bg-cyan-500 text-black"
+                  : "hover:bg-slate-800 hover:text-cyan-400"
+              }`
+            }
           >
-            {item}
-          </button>
+            {item.icon} {item.name}
+          </NavLink>
         ))}
       </nav>
     </aside>
