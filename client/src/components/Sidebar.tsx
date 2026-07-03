@@ -5,8 +5,6 @@ function Sidebar() {
     { name: "Dashboard", path: "/dashboard", icon: "📊" },
     { name: "Documents", path: "/documents", icon: "📄" },
     { name: "AI Chat", path: "/chat", icon: "🤖" },
-    { name: "Favorites", path: "/favorites", icon: "⭐" },
-    { name: "Settings", path: "/settings", icon: "⚙️" },
   ];
 
   return (
@@ -21,7 +19,7 @@ function Sidebar() {
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
-              `block w-full rounded-xl px-4 py-3 transition ${
+              `block rounded-xl px-4 py-3 transition ${
                 isActive
                   ? "bg-cyan-500 text-black"
                   : "hover:bg-slate-800 hover:text-cyan-400"

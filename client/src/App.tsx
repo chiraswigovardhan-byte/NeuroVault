@@ -1,24 +1,37 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import Documents from "./pages/Documents";
+function Sidebar() {
+  const menu = [
+    { name: "Dashboard", path: "/dashboard", icon: "📊" },
+    { name: "Documents", path: "/documents", icon: "📄" },
+    { name: "AI Chat", path: "/chat", icon: "🤖" },
+  ];
 
-function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Landing Page */}
-        <Route path="/" element={<Home />} />
+    <aside className="min-h-screen w-64 border-r border-slate-800 bg-slate-900 p-6">
+      <h1 className="mb-10 text-3xl font-bold text-cyan-400">
+        🧠 NeuroVault
+      </h1>
 
-        {/* Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* Documents */}
-        <Route path="/documents" element={<Documents />} />
-      </Routes>
-    </BrowserRouter>
+      <nav className="space-y-2">
+        {menu.map((item) => (
+          <NavLink
+            key={item.name}
+            to={item.path}
+            className={({ isActive }) =>
+              `block rounded-xl px-4 py-3 transition ${
+                isActive
+                  ? "bg-cyan-500 text-black"
+                  : "hover:bg-slate-800 hover:text-cyan-400"
+              }`
+            }
+          >
+            {item.icon} {item.name}
+          </NavLink>
+        ))}
+      </nav>
+    </aside>
   );
 }
 
-export default App;
+export default Sidebar;
