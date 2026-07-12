@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
@@ -6,47 +7,60 @@ function Documents() {
   const [files, setFiles] = useState<string[]>([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    const savedFiles = localStorage.getItem("documents");
+ const fetchFiles = async () => {
+  try {
+    const res = await axios.get(
+      "http://localhost:5000/api/upload/files"
+    );
 
-    if (savedFiles) {
-      setFiles(JSON.parse(savedFiles));
+    setFiles(res.data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+useEffect(() => {
+  fetchFiles();
+}, []);
+
+ const handleUpload = async (
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  if (!event.target.files) return;
+
+  const selectedFiles = Array.from(event.target.files);
+
+  for (const file of selectedFiles) {
+    const formData = new FormData();
+
+    formData.append("pdf", file);
+
+    try {
+      await axios.post(
+        "http://localhost:5000/api/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    } catch (err) {
+      console.error(err);
     }
-  }, []);
+  }
 
-  const handleUpload = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (!event.target.files) return;
-
-    const uploaded = Array.from(event.target.files).map(
-      (file) => file.name
-    );
-
-    const updatedFiles = [...files, ...uploaded];
-
-    setFiles(updatedFiles);
-
-    localStorage.setItem(
-      "documents",
-      JSON.stringify(updatedFiles)
-    );
-  };
+  fetchFiles();
+};
+     
 
   const deleteFile = (index: number) => {
-    const updatedFiles = files.filter((_, i) => i !== index);
-
-    setFiles(updatedFiles);
-
-    localStorage.setItem(
-      "documents",
-      JSON.stringify(updatedFiles)
-    );
-  };
-
-  const filteredFiles = files.filter((file) =>
-    file.toLowerCase().includes(search.toLowerCase())
-  );
+  const updatedFiles = files.filter((_, i) => i !== index);
+  setFiles(updatedFiles);
+};
+const filteredFiles = files.filter((file) =>
+  file.toLowerCase().includes(search.toLowerCase())
+);
 
   return (
     <div className="flex min-h-screen bg-slate-950 text-white">

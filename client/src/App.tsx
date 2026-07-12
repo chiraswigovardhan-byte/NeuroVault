@@ -1,37 +1,32 @@
-import { NavLink } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function Sidebar() {
-  const menu = [
-    { name: "Dashboard", path: "/dashboard", icon: "📊" },
-    { name: "Documents", path: "/documents", icon: "📄" },
-    { name: "AI Chat", path: "/chat", icon: "🤖" },
-  ];
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Documents from "./pages/Documents";
+import Chat from "./pages/Chat";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
+function App() {
   return (
-    <aside className="min-h-screen w-64 border-r border-slate-800 bg-slate-900 p-6">
-      <h1 className="mb-10 text-3xl font-bold text-cyan-400">
-        🧠 NeuroVault
-      </h1>
+    <Routes>
 
-      <nav className="space-y-2">
-        {menu.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `block rounded-xl px-4 py-3 transition ${
-                isActive
-                  ? "bg-cyan-500 text-black"
-                  : "hover:bg-slate-800 hover:text-cyan-400"
-              }`
-            }
-          >
-            {item.icon} {item.name}
-          </NavLink>
-        ))}
-      </nav>
-    </aside>
+      <Route path="/" element={<Home />} />
+
+      <Route path="/login" element={<Login />} />
+
+      <Route path="/dashboard" element={<Dashboard />} />
+
+      <Route path="/documents" element={<Documents />} />
+
+      <Route path="/chat" element={<Chat />} />
+
+      <Route path="/404" element={<NotFound />} />
+
+      <Route path="*" element={<Navigate to="/404" replace />} />
+
+    </Routes>
   );
 }
 
-export default Sidebar;
+export default App;

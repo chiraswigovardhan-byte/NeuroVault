@@ -1,75 +1,84 @@
-# React + TypeScript + Vite
+# 🧠 NeuroVault
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NeuroVault is an AI-powered document management and knowledge assistant that allows users to upload PDF documents, organize them, and interact with them using an AI chatbot.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 🔐 Login Authentication
+- 📂 Upload PDF Documents
+- 🤖 AI-powered Document Chat
+- 📊 Interactive Dashboard
+- 📄 Document Management
+- 🔍 Search Functionality
+- 🚫 Custom 404 Page
+- 📱 Responsive User Interface
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios
+- React Router DOM
 
-## Expanding the ESLint configuration
+### Backend
+- Node.js
+- Express.js
+- Multer
+- PDF-Parse
+- Google Gemini API
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Folder Structure
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+client/
+- src/
+  - components/
+  - pages/
+  - assets/
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+server/
+- uploads/
+- routes/
+- controllers/
+- index.js
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Installation
 
+### Clone Repository
+
+```bash
+git clone <repository-url>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Install Frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cd client
+npm install
+npm run dev
 ```
+
+### Install Backend
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+## Future Enhancements
+
+- User Accounts
+- Cloud Storage
+- OCR Support
+- Voice Assistant
+- Document Summarization
+- Multi-file AI Chat
+
+## Author
+
+**Chiraswi Gowda**
+
+Computer Science Engineering Student
